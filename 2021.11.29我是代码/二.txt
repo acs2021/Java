@@ -1,0 +1,38 @@
+package brand;
+
+public class demo1 {
+public static void main(String[] args) {
+	//方法1
+	Mythread mythread=new  Mythread();
+	mythread.start();
+	Mythread mythread1=new Mythread();
+	mythread1.start();
+	
+	
+	//方法3
+	
+	Thread thread3=new Thread("子线程") {
+		public void run()
+		
+		{
+			System.out.println(Thread.currentThread().getName());	
+		}
+	};
+	thread3.start();
+	System.out.println(Thread.currentThread().getName());
+}
+
+
+
+
+}
+package brand;
+
+public class Mythread extends Thread {
+public void run() {
+	System.out.println("子线程");
+	
+}
+}
+
+

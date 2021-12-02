@@ -1,0 +1,58 @@
+package com.example.myapplication;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+
+import androidx.annotation.Nullable;
+
+public class JiaoHu extends Activity {
+    //点击事件
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);//通过父类调用子类，讲父类的代码复制进子类，先运行父类在运行子类
+        setContentView(R.layout.layout_jiaohu);//绑定视图//layout文件
+        Button button=findViewById(R.id.btn_test);//findViewById(通过id找视图)
+        Button button1=findViewById(R.id.btn_testt);
+
+
+        button.setOnClickListener(new View.OnClickListener() {//OnClickListener方法里面new了一个OnClickListener对象，具体是我们构造这个方法后
+            @Override                                         //需要实现一些什么，需要做什么
+            public void onClick(View v) {
+button.append("我是帅逼");
+            }
+        });
+button1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        button1.setText("我是帅逼");
+    }
+});
+
+//触摸事件
+        button.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEventevent) {//view 当前视图
+               switch (motionEventevent.getAction())//DOWN(点击) MOVE(移动) UP(松手)
+               {
+                   case MotionEvent.ACTION_DOWN:
+                       Log.d("TAG", "ACTION_DOWN");
+                       break;
+                   case MotionEvent.ACTION_MOVE:
+                       Log.d("TAG", "ACTION_MOVE");
+                       break;
+                   case MotionEvent.ACTION_UP:
+                       Log.d("TAG", "ACTION_UP");
+                       break;
+                   default:
+                       Log.d("TAG", "其他情况");
+                       break;
+               }
+                return false;
+            }
+        });
+    }
+}

@@ -1,0 +1,88 @@
+package com.example.myapplication;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
+import com.example.myapplication.gamebean.MyPoint;
+
+public class Jiugonge extends Activity {
+    private TextView[] textViews;
+    private String tag="TAG";
+    private MyPoint[] points;
+    private int [] ids={R.id.tv_0,R.id.tv_1,R.id.tv_2,R.id.tv_3,R.id.tv_4,R.id.tv_5,R.id.tv_6,R.id.tv_7,R.id.tv_8};
+    LinearLayout lvContent;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.layout3);
+       initView();
+       initPoint();
+        setLisner();
+    }
+    private void initView() {
+        textViews = new TextView[9];
+        for (int i = 0; i <ids.length ; i++) {
+            textViews[i]=findViewById(ids[i]);
+        }
+
+        lvContent=findViewById(R.id.tv_00);
+
+    }
+    private  void initPoint(){
+        int widt =dip2px(this,120);
+        points=new MyPoint[9];
+        for (int i = 0; i <3 ; i++) {
+            for (int j = 0; j <3 ; j++) {
+                MyPoint point=new MyPoint(widt/2+j*widt,widt/2+j*widt);
+                points[i*3+j]=point;
+               // points[i*3+j].y=widt/2+j*widt;
+
+            }
+        }
+    }
+
+private void setLisner(){
+        lvContent.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEventevent) {
+               switch (motionEventevent.getAction())
+               {
+                   case MotionEvent.ACTION_DOWN:
+                       Log.d("TAG", "ACTION_DOWN"+motionEventevent.getX()+">>>>>>>>>>>"+motionEventevent.getY()+points[8].x+">>>"+points[8].y);
+                       break;
+                   case MotionEvent.ACTION_MOVE:
+                       Log.d("TAG", "ACTION_DOWN"+motionEventevent.getX()+">>>>>>>>>>>>>>>>>"+motionEventevent.getY());
+
+                       break;
+                   case MotionEvent.ACTION_UP:
+                       Log.d("TAG", "ACTION_DOWN"+motionEventevent.getX()+">>>>>>>>>>>>>>>>>"+motionEventevent.getY());
+                       break;
+                   default:
+                       Log.d("TAG", "其他情况");
+                       break;
+               }
+                return true;
+            }
+        });
+
+}
+public static int dip2px(Context context,float dip){
+    final float scale=context.getResources().getDisplayMetrics().density;
+    return  (int)(dip*scale+0.5);
+
+}
+
+}
+
+
+
